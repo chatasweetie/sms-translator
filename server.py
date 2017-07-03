@@ -14,11 +14,12 @@ def communication():
     print message
 
     to_phone_number, response = process_message(from_phone_number, message)
-    print to_phone_number
+    print "To Phone number", to_phone_number
+    print response
 
     send_text_message(to_phone_number, response)
 
-    return str("resp")
+    return "."
 
 
 if __name__ == "__main__":
