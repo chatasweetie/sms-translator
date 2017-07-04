@@ -4,7 +4,14 @@ from process_translation import process_message, send_text_message
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
+def homepage():
+    """Sends text message"""
+
+    return "hello"
+
+
+@app.route("/translate", methods=["GET", "POST"])
 def communication():
     """Sends text message"""
 

@@ -1,4 +1,4 @@
-import goslate
+from google.cloud import translate
 import twilio
 from twilio.rest import TwilioRestClient
 import twilio.twiml
@@ -11,23 +11,27 @@ TWILIO_AUTH_TOKEN=os.environ.get("TWILIO_AUTH_TOKEN")
 TWILIO_NUMBER=os.environ.get("TWILIO_NUMBER")
 
 
-def translation(from_phone_number, message):
+def translation(to_phone_number, message):
     """Makes an API call to translate the message.
 
-        >>> translation(18052525094, "jam banana")
-        "I'm translated"
+        >>> translation(18052525094, "banana")
     """
     print "do this one!"
-    print from_phone_number
+    print to_phone_number
     print message
+    print "language:", PHONE_DIC[to_phone_number]['language']
 
-    gs = goslate.Goslate()
-    print "message:", message
-    print "language:", PHONE_DIC[from_phone_number]['language']
+    # Instantiates a client
+    translate_client = translate.Client()
 
-    return gs.translate(message, PHONE_DIC[from_phone_number]['language'])
+    # Translates some text into Russian
+    translation = translate_client.translate(
+        message,
+        target_language=PHONE_DIC[to_phone_number]['language'])
 
-    return "I'm translated"
+    print "translation:", translation
+
+    return translation[u'translatedText']
 
 
 def process_message(from_phone_number, message):
@@ -36,10 +40,12 @@ def process_message(from_phone_number, message):
         >>> from_phone_number = u'18052525094'
         >>> message = u'jam banana'
         >>> process_message(from_phone_number, message)
-        ('+18052525094', "I'm translated")
+        ('+18052525094', "")
     """
 
     print "in the process message function"
+
+    from_phone_number = from_phone_number[1:]
 
     to_phone_number = MY_PHONE_NUMBER
     print "from phone", from_phone_number
@@ -53,11 +59,11 @@ def process_message(from_phone_number, message):
         message = message[3:]
         print "message", message
 
-    translated_message = translation(from_phone_number, message)
+    translated_message = translation(to_phone_number, message)
 
     # if its from mom or dad, add that its from them in the message
     if from_phone_number != MY_PHONE_NUMBER:
-        translated_message = "{}: {}".format(FROM_PARENTS[from_phone_number].upper(), translated_message)
+        translated_message = "{}: {}".format(FROM_PARENTS[from_phone_number].upper(), translated_message.encode('utf-8'))
 
     print "*"*80
     print "done with tranlate function"
