@@ -3,12 +3,13 @@ import twilio
 from twilio.rest import TwilioRestClient
 import twilio.twiml
 import os
-from config import PHONE_DIC, PARENTS, FROM_PARENTS, MY_PHONE_NUMBER
+from config import PHONE_DIC, FROM_PARENTS, MY_PHONE_NUMBER, PARENTS
 
 # Twilio Account Information
 TWILIO_ACCOUNT_SID=os.environ.get("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN=os.environ.get("TWILIO_AUTH_TOKEN")
 TWILIO_NUMBER=os.environ.get("TWILIO_NUMBER")
+
 
 
 def translation(to_phone_number, message):
@@ -45,7 +46,7 @@ def process_message(from_phone_number, message):
 
     print "in the process message function"
 
-    from_phone_number = from_phone_number[1:]
+    from_phone_number = from_phone_number
 
     to_phone_number = MY_PHONE_NUMBER
     print "from phone", from_phone_number

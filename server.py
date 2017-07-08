@@ -15,7 +15,7 @@ def homepage():
 def communication():
     """Sends text message"""
 
-    from_phone_number = request.values.get('From')
+    from_phone_number = request.values.get('From')[1:]
     message = request.values.get("Body").lower()
     print from_phone_number
     print message
