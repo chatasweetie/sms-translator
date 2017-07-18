@@ -3,3 +3,4 @@
 *.json
 *.pyc
 config.py
+app.yaml
