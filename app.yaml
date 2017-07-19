@@ -2,6 +2,19 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+# [START handlers]
 handlers:
+- url: /static
+  static_dir: static
 - url: /.*
-  script: server.app
+  script: main.app
+
+env_variables:
+  TWILIO_ACCOUNT_SID: ""
+  TWILIO_AUTH_TOKEN: ""
+  TWILIO_NUMBER: ""
+  MOM_NUMBER: ""
+  DAD_NUMBER: ""
+  JESSICA_NUMBER: ""
+  JAMES_NUMBER: ""
+  GOOGLE_APPLICATION_CREDENTIALS: ""
