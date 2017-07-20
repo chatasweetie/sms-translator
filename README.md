@@ -23,7 +23,7 @@ For full details on the process of creating this web app: [Translating Text Mess
 
 
 ### About the Developer    
-Jessica Dene Earley    
+Jessica Dene Earley-Cha   
 [Short Bio](https://chatasweetie.com/about-me/)   
 [Linkedin](https://www.linkedin.com/in/jessicaearley)    
-[Chatasweetie's Blog](https://chatasweetie.com/)    
+[Jessica's Blog](https://chatasweetie.com/)    
