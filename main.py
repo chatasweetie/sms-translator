@@ -4,7 +4,7 @@ import twilio
 from twilio.rest import TwilioRestClient
 import twilio.twiml
 import os
-from config import PHONE_DIC, FROM_PARENTS, MY_PHONE_NUMBER, PARENTS
+from config import PHONE_DIRECTORY, FROM_PARENTS, MY_PHONE_NUMBER, PARENTS
 
 # Twilio Account Information
 TWILIO_ACCOUNT_SID=os.environ.get("TWILIO_ACCOUNT_SID")
@@ -42,7 +42,7 @@ def translates(to_phone_number, message):
 
     translation = translate_client.translate(
         message,
-        target_language=PHONE_DIC[to_phone_number]['language'])
+        target_language=PHONE_DIRECTORY[to_phone_number]['language'])
 
     return translation[u'translatedText'].encode('utf-8')
 
@@ -70,15 +70,16 @@ def send_text_message(phone, message):
     """sends a text message to the phone number"""
 
     try:
-        client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+        twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
-        message = client.messages.create(
+        message = twilio_client.messages.create(
             body=message,
             to="+"+phone,
             from_=TWILIO_NUMBER
         )
     except twilio.TwilioRestException as e:
         print e
+
 
 app = webapp2.WSGIApplication([
                         (r'/', Home),
@@ -90,6 +91,7 @@ app = webapp2.WSGIApplication([
 def main():
     from paste import httpserver
     httpserver.serve(app, host='127.0.0.1', port='8080')
+
 
 if __name__ == '__main__':
     main()
