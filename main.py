@@ -38,7 +38,11 @@ class ProcessText(webapp2.RequestHandler):
 
 
 def translates(to_phone_number, message):
-    """Makes an API call to translate the message."""
+    """Makes an API call to translate the message.
+
+        >>> translates(MY_PHONE_NUMBER, "\xec\x9e\x98 \xec\xa7\x80\xeb\x83\x88\xec\x96\xb4\xec\x9a\x94?")
+        'How are you?'
+    """
 
     translation = translate_client.translate(
         message,
@@ -48,7 +52,12 @@ def translates(to_phone_number, message):
 
 
 def process_message(from_phone_number, message):
-    """Processes message, returns from who and translated message"""
+    """Processes message, returns from who and translated message
+
+        >>> process_message(PARENTS["dad"], "\xec\x95\x88\xeb\x85\x95\xed\x95\x98\xec\x84\xb8\xec\x9a\x94") # doctest: +ELLIPSIS
+        ('...', 'DAD: Good morning')
+
+    """
 
     to_phone_number = MY_PHONE_NUMBER
 
@@ -67,7 +76,11 @@ def process_message(from_phone_number, message):
 
 
 def send_text_message(phone, message):
-    """sends a text message to the phone number"""
+    """sends a text message to the phone number
+
+        >>> send_text_message(MY_PHONE_NUMBER, "this is only a test")
+        >>>
+    """
 
     try:
         twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)

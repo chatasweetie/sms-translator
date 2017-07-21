@@ -11,7 +11,7 @@ This application handles [Twilio](https://www.twilio.com/) post request between 
 <img src="images/me-to-them.png" height="250">
 
 
-For full details on the process of creating this web app: [Translating Text Messages using Google Translate API & Twilio](https://chatasweetie.wordpress.com/)    
+For full details on the process of creating this web app: [Text Translator](http://chatasweetie.com/2017/01/14/text-translator-translating-text-messages-using-google-translate-api-twilio)    
 
  
 
