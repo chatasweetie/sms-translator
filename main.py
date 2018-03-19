@@ -32,6 +32,9 @@ class ProcessText(webapp2.RequestHandler):
         from_phone_number = self.request.get("From")[1:]
         message = self.request.get("Body").lower()
 
+        if from_phone_number not in PHONE_DIRECTORY:
+            send_text_message(from_phone_number, "This is for family only")
+
         to_phone_number, response = process_message(from_phone_number, message)
 
         send_text_message(to_phone_number, response)
